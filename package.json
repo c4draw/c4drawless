@@ -1,0 +1,12 @@
+{
+  "name": "c4drawless",
+  "description": "Serveless backend for C4 draw application",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/barreto/c4drawless.git",
+  "author": "Barreto <v.barreto.and@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "commit": "npx git-cz"
+  }
+}
