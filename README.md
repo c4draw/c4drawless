@@ -38,7 +38,7 @@ This project has all its endpoints documented in **Postman** as a **shared colle
 To get a copy of its endpoints, just click the buttons below:
 
 <p align="center">
-  <a href="https://app.getpostman.com/run-collection/8a8c9ec45e6171fb77aa">
+  <a href="https://www.getpostman.com/collections/7c8f03423845fe7d50dd">
     <img src="https://run.pstmn.io/button.svg">
   </a>
   <a href="https://app.swaggerhub.com/apis/thalees/c4-draw/1.0.0">
