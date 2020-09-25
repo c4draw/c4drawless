@@ -99,41 +99,6 @@ To run lambdas tests, run the following command:
   sls invoke test
 ``` -->
 
-## Todo
-
-### Structure
-
-- [x] Script with commitzen - _Barreto_
-- [ ] Git hub actions - _Thales_
-
-### Documentation
-
-- [x] Todo
-- [x] Mantainer
-- [x] Contribution
-- [x] Stack
-- [x] Endpoints
-- [x] Dependencies
-- [x] Installation
-- [ ] Architecture
-- [ ] Tests
-
-### Functions
-
-- **1. About** - _Barreto_
-
-  - [ ] show
-
-- **2. Schema** - _Fit_
-
-  - [x] List
-  - [x] Create
-
-- **3. Screenshot** - _Polizeli_
-
-  - [ ] List
-  - [ ] Create
-
 ---
 
 <h5 align="center">
