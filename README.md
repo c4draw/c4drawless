@@ -84,7 +84,7 @@ npm install -g serverless
 
 **_Diagram_**
 
-![Architectural diagram](https://github.com/c4draw/c4drawless/blob/master/img/architecture.jpg)
+![Architectural diagram](https://github.com/c4draw/c4drawless/blob/master/img/architecture.jpeg?raw=true)
 
 - The application is served using `AWS`
 - The implantation is carried out via `Serverless framework`
