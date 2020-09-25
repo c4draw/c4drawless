@@ -38,7 +38,7 @@ This project has all its endpoints documented in **Postman** as a **shared colle
 To get a copy of its endpoints, just click the buttons below:
 
 <p align="center">
-  <a href="https://app.getpostman.com/run-collection/8a8c9ec45e6171fb77aa">
+  <a href="https://www.getpostman.com/collections/7c8f03423845fe7d50dd">
     <img src="https://run.pstmn.io/button.svg">
   </a>
   <a href="https://app.swaggerhub.com/apis/thalees/c4-draw/1.0.0">
@@ -84,7 +84,9 @@ npm install -g serverless
 
 **_Diagram_**
 
-![Architectural diagram](https://github.com/c4draw/c4drawless/blob/master/img/architecture.jpeg?raw=true)
+<div align="center">
+  <img alt="Architectural diagram" src="https://user-images.githubusercontent.com/40672950/94321066-f7f40b80-ff64-11ea-9b28-661168f58ec7.png"></img>
+</div>
 
 - The application is served using `AWS`
 - The implantation is carried out via `Serverless framework`
@@ -102,7 +104,5 @@ To run lambdas tests, run the following command:
 ---
 
 <h5 align="center">
-Team
-<a src="https://github.com/orgs/c4draw/people">@C4Draw/team</a>
-
+Team<a src="https://github.com/orgs/c4draw/people">@C4Draw/team</a>
 </h5>
