@@ -97,3 +97,4 @@ resources:
 
 plugins:
   - serverless-functions-base-path
+  - serverless-jest-plugin
