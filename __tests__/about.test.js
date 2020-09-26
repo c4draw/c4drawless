@@ -6,7 +6,7 @@ const lambdaWrapper = jestPlugin.lambdaWrapper;
 const wrapped = lambdaWrapper.wrap(mod, { handler: 'handle' });
 
 describe("index", () => {
-  it("implement tests here", () => {
+  it("should successfully return the api version", () => {
     return wrapped.run({}).then((response) => {
       console.log(response)
       expect(response.statusCode).toBe(200);
