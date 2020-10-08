@@ -1,0 +1,24 @@
+name: Deploy Staging branch
+
+on:
+  push:
+    branches:
+      - staging
+jobs:
+  deploy-staging:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+    - name: Install Serverless Framework
+      run: npm install -g serverless
+    - name: Install NPM dependencies
+      run: npm install
+    - name: Run tests
+      run: sls invoke test
+    - name: Serverless AWS authentication
+      run: sls config credentials --provider aws --key ${{ secrets.AWS_ACCESS_KEY_ID }} --secret ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    - name: Deploy Lambda functions
+      run: sls deploy -s stg
