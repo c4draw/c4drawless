@@ -113,6 +113,7 @@ resources:
           ProvisionedThroughput:
             ReadCapacityUnits: 1
             WriteCapacityUnits: 1
+    # Cognito
     HttpApi:
       DependsOn: serviceUserPool
     serviceUserPool:
@@ -152,6 +153,7 @@ resources:
         UserPoolId:
           Ref: serviceUserPool
         Domain: service-user-pool-domain-${opt:stage, self:provider.stage}-${self:provider.environment.DOMAIN_SUFFIX}
+
 plugins:
   - serverless-functions-base-path
   - serverless-jest-plugin
