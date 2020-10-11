@@ -7,6 +7,7 @@ provider:
   runtime: nodejs12.x
   region: us-east-1
   environment:
+    DOMAIN_SUFFIX: c4drawless
     SCHEMA_TABLE: schema-table-${opt:stage, self:provider.stage}
     SCREENSHOT_TABLE: screenshot-table-${opt:stage, self:provider.stage}
   iamRoleStatements:
@@ -20,6 +21,19 @@ provider:
         - s3:GetObject
         - s3:PutObject
       Resource: "*"
+  httpApi:
+    authorizers:
+      serviceAuthorizer:
+        identitySource: $request.header.Authorization
+        issuerUrl:
+          Fn::Join:
+          - ''
+          - - 'https://cognito-idp.'
+            - '${opt:region, self:provider.region}'
+            - '.amazonaws.com/'
+            - Ref: serviceUserPool
+        audience:
+          - Ref: serviceUserPoolClient
 
 custom:
   functionsBasePath: functions
@@ -27,17 +41,43 @@ custom:
 functions:
   about:
     handler: about.handle
+    events:
+      - httpApi:
+            method: GET
+            path: /about
+            authorizer: serviceAuthorizer
   listSchema:
     handler: schema/list.handle
+    events:
+      - httpApi:
+            method: GET
+            path: /users/{userId}/schemas
+            authorizer: serviceAuthorizer
   createSchema:
     handler: schema/create.handle
+    events:
+      - httpApi:
+            method: POST
+            path: /users/{userId}/schemas
+            authorizer: serviceAuthorizer
   listScreenshot:
     handler: screenshot/list.handle
+    events:
+      - httpApi:
+            method: GET
+            path: /users/{userId}/scrennshots
+            authorizer: serviceAuthorizer
   createScreenshot:
     handler: screenshot/create.handler
+    events:
+      - httpApi:
+            method: POST
+            path: /users/{userId}/screenshots
+            authorizer: serviceAuthorizer
 
 resources:
   Resources:
+    # DynamoDb
     SchemaDynamoDbTable:
       Type: 'AWS::DynamoDB::Table'
       DeletionPolicy: Retain
@@ -94,6 +134,46 @@ resources:
           ProvisionedThroughput:
             ReadCapacityUnits: 1
             WriteCapacityUnits: 1
+    # Cognito
+    HttpApi:
+      DependsOn: serviceUserPool
+    serviceUserPool:
+      Type: AWS::Cognito::UserPool
+      Properties:
+        UserPoolName: service-user-pool-${opt:stage, self:provider.stage}
+        UsernameAttributes:
+          - email
+        AutoVerifiedAttributes:
+          - email
+    serviceUserPoolClient:
+      Type: AWS::Cognito::UserPoolClient
+      Properties:
+        ClientName: service-user-pool-client-${opt:stage, self:provider.stage}
+        AllowedOAuthFlows:
+          - implicit
+        AllowedOAuthFlowsUserPoolClient: true
+        AllowedOAuthScopes:
+          - phone
+          - email
+          - openid
+          - profile
+          - aws.cognito.signin.user.admin
+        UserPoolId:
+          Ref: serviceUserPool
+        CallbackURLs:
+          - https://localhost:3000
+        ExplicitAuthFlows:
+          - ALLOW_USER_SRP_AUTH
+          - ALLOW_REFRESH_TOKEN_AUTH
+        GenerateSecret: false
+        SupportedIdentityProviders:
+          - COGNITO
+    serviceUserPoolDomain:
+      Type: AWS::Cognito::UserPoolDomain
+      Properties:
+        UserPoolId:
+          Ref: serviceUserPool
+        Domain: service-user-pool-domain-${opt:stage, self:provider.stage}-${self:provider.environment.DOMAIN_SUFFIX}
 
 plugins:
   - serverless-functions-base-path
