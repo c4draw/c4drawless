@@ -44,15 +44,36 @@ functions:
     events:
       - httpApi:
             method: GET
+            path: /about
             authorizer: serviceAuthorizer
   listSchema:
     handler: schema/list.handle
+    events:
+      - httpApi:
+            method: GET
+            path: /users/{userId}/schemas
+            authorizer: serviceAuthorizer
   createSchema:
     handler: schema/create.handle
+    events:
+      - httpApi:
+            method: POST
+            path: /users/{userId}/schemas
+            authorizer: serviceAuthorizer
   listScreenshot:
     handler: screenshot/list.handle
+    events:
+      - httpApi:
+            method: GET
+            path: /users/{userId}/scrennshots
+            authorizer: serviceAuthorizer
   createScreenshot:
     handler: screenshot/create.handler
+    events:
+      - httpApi:
+            method: POST
+            path: /users/{userId}/screenshots
+            authorizer: serviceAuthorizer
 
 resources:
   Resources:
