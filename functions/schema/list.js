@@ -2,9 +2,8 @@
 
 const AWS = require('aws-sdk');
 
-const dynamoDbConnection = new AWS.DynamoDB.DocumentClient();
-
 module.exports.handle = (event, _context, callback) => {
+  const dynamoDbConnection = event.databaseConnection || new AWS.DynamoDB.DocumentClient();
   const userId = event.pathParameters.userId;
 
   const params = {
@@ -18,7 +17,6 @@ module.exports.handle = (event, _context, callback) => {
 
   dynamoDbConnection.scan(params, (error, result) => {
     if (error) {
-      console.error(error);
       callback(null, {
         statusCode: 500,
         headers: { 'Content-Type': 'text/plain' },

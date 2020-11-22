@@ -18,7 +18,6 @@ module.exports.handle = (event, _context, callback) => {
 
   dynamoDbConnection.scan(params, (error, result) => {
     if (error) {
-      console.error(error);
       callback(null, {
         statusCode: 500,
         headers: { 'Content-Type': 'text/plain' },
