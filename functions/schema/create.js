@@ -3,9 +3,10 @@
 const AWS = require('aws-sdk');
 const uuid = require('uuid');
 
-const dynamoDbConnection = new AWS.DynamoDB.DocumentClient();
 
 module.exports.handle = (event, _context, callback) => {
+  const dynamoDbConnection = event.databaseConnection || new AWS.DynamoDB.DocumentClient();
+
   const timestamp = new Date().getTime();
   const data = JSON.parse(event.body);
   const userId = event.pathParameters.userId;
@@ -24,7 +25,6 @@ module.exports.handle = (event, _context, callback) => {
 
   dynamoDbConnection.put(params, (error) => {
     if (error) {
-      console.error(error);
       callback(null, {
         statusCode: 500,
         headers: { 'Content-Type': 'text/plain' },
