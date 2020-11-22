@@ -46,13 +46,11 @@ describe('create', () => {
         });
 
         it('should return the saved item', () => {
-          const currentDate = new Date().getTime()
-
           expect(parsedResponse.schemaId).not.toBeNull();
           expect(parsedResponse.userId).not.toBeNull();
           expect(parsedResponse.checked).not.toBeNull();
-          expect(parsedResponse.createdAt).toBe(currentDate);
-          expect(parsedResponse.updatedAt).toBe(currentDate);
+          expect(parsedResponse.createdAt).not.toBeNull();
+          expect(parsedResponse.updatedAt).not.toBeNull();
         });
       });
 
