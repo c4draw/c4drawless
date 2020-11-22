@@ -13,6 +13,7 @@
     "serverless-functions-base-path": "^1.0.32"
   },
   "dependencies": {
-    "serverless-jest-plugin": "^0.3.0"
+    "serverless-jest-plugin": "^0.3.0",
+    "sinon": "^9.2.1"
   }
 }
